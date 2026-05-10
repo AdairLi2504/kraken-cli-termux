@@ -68,7 +68,7 @@ fn build_default_headers() -> Result<HeaderMap> {
 
 fn build_http_client() -> Result<reqwest::Client> {
     let mut builder = reqwest::Client::builder()
-        .use_rustls_tls()
+        .use_native_tls()
         .timeout(Duration::from_secs(30))
         .user_agent(telemetry::user_agent())
         .default_headers(build_default_headers()?);
