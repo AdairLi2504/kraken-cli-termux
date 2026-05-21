@@ -2,7 +2,7 @@
 
 ![version](https://img.shields.io/github/v/release/krakenfx/kraken-cli?color=blue)
 ![license](https://img.shields.io/badge/license-MIT-green)
-![platform](https://img.shields.io/badge/platform-macOS%20%7C%20Linux-lightgrey)
+![platform](https://img.shields.io/badge/platform-termux(android)-lightgrey)
 
 The first AI-native CLI for trading crypto, stocks, forex, and derivatives.
 
@@ -42,41 +42,49 @@ Try these with your AI agent:
 
 ## Installation
 
-Single binary, no runtime dependencies.
+Must build from source in termux
 
-### One-liner
+### Requirements
+
+Requires [Rust](https://rustup.rs/) and openssl.
 
 ```bash
-curl --proto '=https' --tlsv1.2 -LsSf https://github.com/krakenfx/kraken-cli/releases/latest/download/kraken-cli-installer.sh | sh
+pkg install git rust openssl openssl-tool pkg-config
 ```
-
-Detects your OS and architecture, downloads the right binary, and installs it. macOS (Apple Silicon and Intel) and Linux (x86_64 and ARM64) are supported. Windows: use WSL.
-
-Verify it works:
+### Install
 
 ```bash
-kraken status && kraken ticker BTCUSD
-```
-
-Pre-built binaries are also available on the [GitHub Releases](https://github.com/krakenfx/kraken-cli/releases) page.
-
-<details>
-<summary>Build from source</summary>
-
-Requires [Rust](https://rustup.rs/).
-
-```bash
-cargo install --git https://github.com/krakenfx/kraken-cli
+cargo install --git https://github.com/AdairLi2504/kraken-cli-termux
 ```
 
 Or clone and build:
 
 ```bash
-git clone https://github.com/krakenfx/kraken-cli.git
-cd kraken-cli
+git clone https://github.com/AdairLi2504/kraken-cli-termux
+cd kraken-cli-termux
 cargo install --path .
 ```
-</details>
+
+After that, you may see a warning like this:
+
+```bash
+warning: be sure to add `/data/data/com.termux/files/home/.cargo/bin` to your PATH to be able to run the installed binaries
+```
+
+Remember to add the Cargo bin folder to the PATH env. 
+
+```bash
+# Replace '/data/data/com.termux/files/home/.cargo/bin' with the path shown in the warning.
+echo 'export PATH="$PATH:/data/data/com.termux/files/home/.cargo/bin"' >> ~/.bashrc
+source ~/.bashrc
+```
+
+### Verify
+Verify it works:
+
+```bash
+kraken status && kraken ticker BTCUSD
+```
 
 ## What You Can Trade
 
